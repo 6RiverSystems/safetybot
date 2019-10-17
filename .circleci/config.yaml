@@ -14,12 +14,12 @@ jobs:
       - sixrs-gke/docker-login
       - attach_workspace:
           at: ./
-      - sixrs-gke/build-and-publish
-      - sixrs-gke/deploy:
-          namespace: techops
-          deployment: safetybot
-          container: safetybot
-          image: safetybot
+      # - sixrs-gke/build-and-publish
+      # - sixrs-gke/deploy:
+      #     namespace: techops
+      #     deployment: safetybot
+      #     container: safetybot
+      #     image: safetybot
 workflows:
   version: 2.1
   build-and-deploy:
