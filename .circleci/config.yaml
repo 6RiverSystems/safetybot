@@ -2,20 +2,29 @@ version: 2.1
 orbs:
   sixrs-gke: sixriversystems/sixrs-gke@0.2.1
 jobs:
-  build:
+  build-publish-deploy:
     docker:
       - image: circleci/node:10
+        environment:
+          - CLUSTER: srs-internal
     steps:
       - checkout
-      - run:
-          name: Setup Environment
-          command: |
-            mkdir ci_scripts
-            curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept:application/vnd.github.v3.raw"  https://api.github.com/repos/6RiverSystems/ci_scripts/contents/ci_tool.sh >> ci_scripts/ci_tool.sh
-            chmod +x ci_scripts/ci_tool.sh
-      - restore_cache:
-          keys:
-            - dependency-cache-{{ checksum "package.json" }}
-          key: dependency-cache-{{ checksum "package.json "}}
-          paths:
-            - ./node_modules
+      - setup_remote_docker
+      - sixrs-gke/run-release
+      - sixrs-gke/docker-login
+      - attach_workspace:
+        at: ./
+      - sixrs-gke/build-and-publish
+      - sixrs-gke/deploy:
+          namespace: techops
+          deployment: safetybot
+          container: safetybot
+          image: safetybot
+workflows:
+  version: 2.1
+  build-publish-deploy:
+    jobs:
+      - build-publish-deploy:
+        context: 6rs-circle
+
+      
