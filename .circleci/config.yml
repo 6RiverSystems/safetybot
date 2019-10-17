@@ -12,8 +12,8 @@ jobs:
       - setup_remote_docker
       - attach_workspace:
           at: ./
-      - sixrs-gke/run-release
       - sixrs-gke/docker-login
+      - sixrs-gke/run-release
       - sixrs-gke/build-and-publish
       - sixrs-gke/deploy:
           namespace: techops
