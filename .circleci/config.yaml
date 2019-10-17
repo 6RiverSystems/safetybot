@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: circleci/node:10
         environment:
-        - CLUSTER: srs-internal
+          - CLUSTER: srs-internal
     steps:
       - checkout
       - setup_remote_docker
@@ -20,11 +20,9 @@ jobs:
           deployment: safetybot
           container: safetybot
           image: safetybot
-
 workflows:
   version: 2.1
-
-  test_build_deploy:
+  build-and-deploy:
     jobs:
-      - build:
+      - build-publish-deploy:
           context: 6rs-circle
