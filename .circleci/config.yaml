@@ -22,9 +22,7 @@ jobs:
           image: safetybot
 workflows:
   version: 2.1
-  build-publish-deploy:
+  build-and-deploy:
     jobs:
       - build-publish-deploy:
-        context: 6rs-circle
-
-      
+          context: 6rs-circle
