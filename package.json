@@ -1,5 +1,5 @@
 {
-  "name": "safety-escalation-slack-app",
+  "name": "safetybot",
   "version": "1.0.0",
   "description": "slack slash command /safe that creates a high sev Jira ticket in the SAFE project",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/savini-prem/slack_app"
+    "url": "https://github.com/6RiverSystems/safetybot"
   },
   "author": "Savini Prematilleke",
   "license": "ISC"
