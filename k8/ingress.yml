@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/tls-acme: "true"
+  generation: 1
+  name: safetybot-ingress
+  namespace: techops
+spec:
+  rules:
+  - host: safetybot.6river.tech
+    http:
+      paths:
+      - backend:
+          serviceName: safetybot
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - safetybot.6river.tech
+    secretName: safetybot-6river-tech

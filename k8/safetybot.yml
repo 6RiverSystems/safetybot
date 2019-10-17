@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: safetybot
+  labels:
+    app: safetybot
+  namespace: techops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safetybot
+  template:
+    metadata:
+      labels:
+        app: safetybot
+    spec:
+      containers:
+        - name: safetybot
+          image: gcr.io/plasma-column-128721/safetybot:latest
+          ports:
+            - containerPort: 1005
+          env:
+            - name: SLACK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: safetybot-tokens  
+                  key: slack-client-secret
+            - name: JIRA_AUTH
+              valueFrom:
+                secretKeyRef:
+                  name: safetybot-tokens
+                  key: jira-auth
+            - name: SLACK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: safetybot-tokens
+                  key: slack-client-id
+            - name: PORT
+              value: '1005'
