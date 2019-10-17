@@ -10,19 +10,21 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - sixrs-gke/run-release
-      - sixrs-gke/docker-login
       - attach_workspace:
           at: ./
+      - sixrs-gke/run-release
+      - sixrs-gke/docker-login
       - sixrs-gke/build-and-publish
       - sixrs-gke/deploy:
           namespace: techops
           deployment: safetybot
           container: safetybot
           image: safetybot
+
 workflows:
   version: 2.1
-  build-and-deploy:
+
+  test_build_deploy:
     jobs:
-      - build-publish-deploy:
+      - build:
           context: 6rs-circle
