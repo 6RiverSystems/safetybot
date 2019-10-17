@@ -26,7 +26,7 @@ app.listen(port, function () {
 
 // This route handles GET requests to our root ngrok address and responds with "Ngrok is working"
 app.get('/', function(req, res) {
-    res.send('Application has been running for ' + process.uptime());
+    res.send(`Application has been running for ${process.uptime()} seconds.`);
 });
 
 // This route handles get request to a /oauth endpoint. 
