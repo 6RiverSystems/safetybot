@@ -13,7 +13,7 @@ jobs:
       - sixrs-gke/run-release
       - sixrs-gke/docker-login
       - attach_workspace:
-        at: ./
+          at: ./
       - sixrs-gke/build-and-publish
       - sixrs-gke/deploy:
           namespace: techops
