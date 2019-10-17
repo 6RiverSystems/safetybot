@@ -20,6 +20,7 @@ jobs:
           deployment: safetybot
           container: safetybot
           image: safetybot
+          
 workflows:
   version: 2.1
   build-and-deploy:
