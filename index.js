@@ -26,7 +26,7 @@ app.listen(port, function () {
 
 // This route handles GET requests to our root ngrok address and responds with "Ngrok is working"
 app.get('/', function(req, res) {
-    res.send(`Application has been running for ${process.uptime()} seconds.`);
+    res.send('Ngrok is working! Path Hit: ' + req.url);
 });
 
 // This route handles get request to a /oauth endpoint. 
@@ -62,15 +62,15 @@ app.post('/safe', function(req, res) {
     var jiraData = {
         "fields": {
             "project" : {
-                "key": "SAFE"
+                "key": "SRE" //"key": "SAFE" TESTING CHANGE
             }, 
             "issuetype" : {
                 "name": "SWRE"
             }, 
-            "summary" : text, 
+            "summary" : text.substring(0,150), 
             "description" : text + "\n Reported by: " + user + "6river.com",
             "priority" : {
-                "name": "Severity 1"
+                "name": "Severity 3"//"name": "Severity 1" TESTING CHANGE
             }
         }
     }
@@ -96,4 +96,5 @@ app.post('/safe', function(req, res) {
     }); 
 
     res.json({response_type : 'in_channel'});
+
 });
