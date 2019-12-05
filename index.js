@@ -67,7 +67,7 @@ app.post('/safe', function(req, res) {
             "issuetype" : {
                 "name": "SWRE"
             }, 
-            "summary" : text, 
+            "summary" : text.substring(0,150), 
             "description" : text + "\n Reported by: " + user + "6river.com",
             "priority" : {
                 "name": "Severity 1"
